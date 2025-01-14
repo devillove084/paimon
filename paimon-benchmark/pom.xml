@@ -28,8 +28,26 @@ under the License.
         <version>1.1-SNAPSHOT</version>
     </parent>
 
+    <build>
+        <extensions>
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>1.7.0</version>
+            </extension>
+        </extensions>
+    </build>
+
     <artifactId>paimon-benchmark</artifactId>
     <name>Paimon : Benchmark</name>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.opendal</groupId>
+            <artifactId>opendal</artifactId>
+            <version>0.47.7</version>
+            <classifier>${os.detected.classifier}</classifier>
+        </dependency>
+    </dependencies>
 
     <packaging>pom</packaging>
 
