@@ -37,6 +37,7 @@
         <module>paimon-oss-impl</module>
         <module>paimon-s3</module>
         <module>paimon-s3-impl</module>
+        <module>paimon-opendal-impl</module>
     </modules>
 
     <properties>
