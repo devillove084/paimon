@@ -18,9 +18,10 @@
 
 package org.apache.paimon.opendal;
 
+import org.apache.paimon.catalog.CatalogContext;
+
 import org.apache.opendal.Operator;
 import org.apache.opendal.ServiceConfig;
-import org.apache.paimon.catalog.CatalogContext;
 
 import java.util.Map;
 
@@ -28,11 +29,20 @@ public class OperatorFactory {
 
     public static OperatorWrapper create(CatalogContext context) {
         Map<String, String> options = context.options().toMap();
-        String endpoint = options.getOrDefault("opendal.s3.endpoint", "https://s3.amazonaws.com");
-        String bucket = options.getOrDefault("opendal.s3.bucket", "my-bucket");
+        String endpoint = options.getOrDefault("opendal.s3.endpoint", "http://127.0.0.1:9000");
+        String bucket = options.getOrDefault("opendal.s3.bucket", "my-test-bucket");
+        String accessKey = options.getOrDefault("opendal.s3.access-key", "minio");
+        String secretKey = options.getOrDefault("opendal.s3.secret-key", "minio123");
 
         final ServiceConfig.S3 builder =
-                ServiceConfig.S3.builder().root(endpoint).bucket(bucket).build();
+                ServiceConfig.S3
+                        .builder()
+                        .endpoint(endpoint)
+                        .bucket(bucket)
+                        .region("auto")
+                        .accessKeyId(accessKey)
+                        .secretAccessKey(secretKey)
+                        .build();
         return new OperatorWrapper(Operator.of(builder));
     }
 }

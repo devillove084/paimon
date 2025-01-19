@@ -18,13 +18,14 @@
 
 package org.apache.paimon.opendal;
 
-import org.apache.opendal.Metadata;
 import org.apache.paimon.catalog.CatalogContext;
 import org.apache.paimon.fs.FileIO;
 import org.apache.paimon.fs.FileStatus;
 import org.apache.paimon.fs.Path;
 import org.apache.paimon.fs.PositionOutputStream;
 import org.apache.paimon.fs.SeekableInputStream;
+
+import org.apache.opendal.Metadata;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -38,8 +39,7 @@ public class OpenDALFileIO implements FileIO {
 
     private transient volatile OperatorWrapper operator;
 
-    public OpenDALFileIO() {
-    }
+    public OpenDALFileIO() {}
 
     @Override
     public boolean isObjectStore() {
@@ -114,7 +114,6 @@ public class OpenDALFileIO implements FileIO {
         operator.rename(src, dst);
         return true;
     }
-
 
     private static class OpenDALFileStatus implements FileStatus {
 
